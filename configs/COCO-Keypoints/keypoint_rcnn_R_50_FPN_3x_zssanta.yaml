@@ -6,8 +6,6 @@ DATASETS:
   PROPOSAL_FILES_TRAIN: ()
   TEST: ('keypoints_coco_2017_val',)
   TRAIN: ('keypoints_coco_2017_train',)
-DATALOADER:
-  NUM_WORKERS=6
 MODEL:
   WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
   RESNETS:
