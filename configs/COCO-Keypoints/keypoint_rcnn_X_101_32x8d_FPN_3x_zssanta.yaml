@@ -4,8 +4,8 @@ DATASETS:
   PRECOMPUTED_PROPOSAL_TOPK_TRAIN: 2000
   PROPOSAL_FILES_TEST: ()
   PROPOSAL_FILES_TRAIN: ()
-  TEST: ('keypoints_coco_2014_val',)
-  TRAIN: ('keypoints_coco_2014_train',)
+  TEST: ('keypoints_coco_2017_val',)
+  TRAIN: ('keypoints_coco_2017_train',)
 
 MODEL:
   WEIGHTS: "detectron2://ImageNetPretrained/FAIR/X-101-32x8d.pkl"
