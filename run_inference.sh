@@ -1,0 +1,1 @@
+python tools/train_net.py --num-gpus 1 --config-file configs/COCO-Keypoints/keypoint_rcnn_R_50_FPN_3x_zssanta.yaml --eval-only MODEL.WEIGHTS detectron2://COCO-Keypoints/keypoint_rcnn_R_50_FPN_3x/137849621/model_final_a6e10b.pkl
