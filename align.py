@@ -5,6 +5,7 @@ import cv2
 from scipy.spatial.distance import cdist
 from scipy.optimize import linear_sum_assignment
 import argparse
+import collections
 
 def head_person_area_ratio(head_area, person_area, l1, l2):
     d = -1.0
@@ -336,8 +337,9 @@ def Align(head_file, person_file, out_file, image_dir, metrics_file, swap=False,
     
     heads = open(head_file, 'r').readlines()
     persons = open(person_file, 'r').readlines()
+    all_n = len(heads)
     out = open(out_file, 'w')
-    for i in range(len(heads)):
+    for i in range(all_n):
         head_line = heads[i]
         head_parts = head_line.strip().split('\t')
         img_file_name = head_parts[0]
@@ -361,7 +363,7 @@ def Align(head_file, person_file, out_file, image_dir, metrics_file, swap=False,
             csv_text, cover_ratio = drawRectangles(indices, C,  head_bbs, person_bbs, image, img_file_name)
             out.write(csv_text)
             
-            print(img_file_name)
+            print('[', i+1 ,'/', all_n, ']', img_file_name)
             if visualize:
                 out_path = os.path.join(image_dir, os.path.dirname(img_file_name).strip().split(os.sep)[-1], os.path.basename(img_file_name))
                 print('\t--->', out_path)
@@ -374,6 +376,7 @@ def Align(head_file, person_file, out_file, image_dir, metrics_file, swap=False,
    
     metrics = finalizeMetrics(cummulated_metrics, old)
     metrics['name'] = out_file
+    metrics = collections.OrderedDict(sorted(metrics.items(), key=lambda x:(x[0], x[1])))
     with open(metrics_file, 'a+') as f:
         f.write('\n')
         json.dump(metrics, f)
